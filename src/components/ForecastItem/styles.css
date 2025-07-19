@@ -1,0 +1,12 @@
+.forecast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF30;
+    padding: 8px;
+    border-radius: 16px;
+
+    .forecast-temp {
+        font-weight: 600;
+    }
+}

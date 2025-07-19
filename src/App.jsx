@@ -1,12 +1,14 @@
 import SearchBar from "./components/SearchBar";
 import WeatherCard from "./components/WeatherCard";
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
+import ForecastList from "./components/ForecastList";
 
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 function App() {
   const [weather, setWeather] = useState(null);
+  const [forecast, setForecast] = useState([]);
 
   useEffect(() => {
     async function fetchWeather() {
@@ -16,6 +18,7 @@ function App() {
 
         if (data.results) {
           setWeather(data.results);
+          setForecast(data.results.forecast.slice(1, 4));
         }
       
       } catch (error) {
@@ -34,6 +37,7 @@ function App() {
         <>
           <h1>{weather.city}</h1>
           <WeatherCard weather={weather} />
+          <ForecastList forecasts={forecast} />
         </>
       )}
 
