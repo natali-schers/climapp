@@ -31,7 +31,7 @@ function App() {
           setErrorMessage("Não foi possível obter os dados do clima.");
         }
       } catch (error) {
-        setErrorMessage("Não foi possível obter os dados do clima.");
+        setErrorMessage("Não foi possível obter os dados do clima.: " + error.message);
       } finally {
         setLoading(false);
       }
@@ -43,13 +43,13 @@ function App() {
           const { latitude, longitude } = position.coords;
           fetchInitialWeatherByCoordinates(latitude, longitude);
         },
-        (err) => {
-          setError("Permissão de localização negada." + err);
+        (error) => {
+          setErrorMessage("Permissão de localização negada: " + error.message);
           setLoading(false);
         }
       );
     } else {
-      setError("Geolocalização não suportada pelo navegador.");
+      setErrorMessage("Geolocalização não suportada pelo navegador.");
       setLoading(false);
     }
 
