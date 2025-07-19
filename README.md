@@ -20,6 +20,7 @@ As técnicas e tecnologias utilizadas pra isso são:
 - `Vite`: ferramenta de build do app
 - `Figma`: para prototipar o app
 - `HG Brasil`: site da API utilizada para obter informações do clima
+- `Geolocation API`: para obter a localização atual do usuário e buscar automaticamente o clima local
 
 ## 📁 Acesso ao projeto
 
