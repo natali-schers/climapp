@@ -4,6 +4,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import ForecastList from "./components/ForecastList";
 import Loading from "./components/Loading";
+import { parse, format } from 'date-fns';
 
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
@@ -35,20 +36,27 @@ function App() {
     fetchWeather();
   }, [city]);
 
+  function formatToBrazilianTime(time12h) {
+    const parsed = parse(time12h, 'hh:mm a', new Date());
+    return format(parsed, 'HH:mm');
+  }
+
   return (
     <div className="app-container">
-      <SearchBar onSearch={setCity}/>
+      <SearchBar onSearch={setCity} />
 
       {
         loading ? <Loading />
-        : weather ? (
+          : weather ? (
             <>
               <h1>{weather.city}</h1>
+              <p>Nascer do Sol: {formatToBrazilianTime(weather.sunrise)} | Pôr do Sol: {formatToBrazilianTime(weather.sunset)}</p>
+
               <WeatherCard weather={weather} />
               <ForecastList forecasts={forecast} />
             </>
           )
-        : (<p>Digite uma cidade para buscar o clima.</p>)
+            : (<p>Digite uma cidade para buscar o clima.</p>)
       }
 
     </div>
